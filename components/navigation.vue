@@ -1,17 +1,17 @@
 <template>
-	<div class="top-nav active">
-	        <div class="content">
-	          <div class="back" onClick={back}></div>
-	          <div class="title">{{title}}</div>
-	          <div class="menu">
-	            <div onClick={intoSetting}>
-	              <div></div>
-	              <div></div>
-	              <div></div>
-	            </div>
-	          </div>
-	        </div>
-	      </div>
+	<view class="top-nav active">
+	        <view class="content">
+	          <view class="back" @click="back"></view>
+	          <view class="title">{{title}}</view>
+	          <view class="menu">
+	            <view @click='intoSetting'>
+	              <view></view>
+	              <view></view>
+	              <view></view>
+	            </view>
+	          </view>
+	        </view>
+	      </view>
 </template>
 
 <script>
@@ -24,6 +24,14 @@
 			return {
 				
 			}
+		},
+		methods:{
+			back(){
+				uni.navigateBack({
+					delta:1
+				})
+			},
+			intoSetting(){},
 		}
 	}
 </script>
@@ -31,7 +39,7 @@
 <style scoped lang="scss">
 	.top-nav {
 	  width: 100vw;
-	  height: 44px;
+	  height: 88upx;
 	  position: fixed;
 	  top: 0;
 	  left: 0;
@@ -39,13 +47,13 @@
 	
 	  .content {
 	    width: 100vw;
-	    height: 44px;
+	    height: 88upx;
 	    display: flex;
 	    justify-content: space-between;
 	
 	    .back {
-	      width: 44px;
-	      height: 44px;
+	      width: 88upx;
+	      height: 88upx;
 	      display: flex;
 	      align-items: center;
 	      justify-content: center;
@@ -53,53 +61,53 @@
 	      &::after {
 	        display: block;
 	        content: ' ';
-	        width: 10px;
-	        height: 10px;
-	        border-top: solid 2px #ffffff;
-	        border-left: solid 2px #ffffff;
+	        width: 20upx;
+	        height: 20upx;
+	        border-top: solid 4upx #ffffff;
+	        border-left: solid 4upx #ffffff;
 	        transform: rotate(-45deg);
 	      }
 	    }
 	
 	    .title {
 	      flex: 1;
-	      font-size: 17px;
+	      font-size: 17upx;
 	      font-family: PingFangSC-Regular, PingFang SC;
 	      font-weight: 400;
 	      color: #FFFFFF;
-	      line-height: 44px;
+	      line-height: 88upx;
 	      text-align: center;
 	    }
 	
 	    .menu {
-	      width: 44px;
-	      height: 44px;
+	      width: 88upx;
+	      height: 88upx;
 	      display: flex;
 	      align-items: center;
 	      justify-content: center;
 	
-	      > div {
+	      > view {
 	        display: block;
 	        content: '';
-	        width: 22px;
-	        height: 22px;
+	        width: 44upx;
+	        height: 44upx;
 	        color: #ffffff;
-	        border-radius: 22px;
-	        border: solid 1px #ffffff;
+	        border-radius: 44upx;
+	        border: solid 2upx #ffffff;
 	        text-align: center;
 	        display: flex;
 	        justify-content: space-between;
 	        align-items: center;
-	        padding: 2px;
+	        padding: 4upx;
 	        box-sizing: border-box;
 	
-	        > div {
-	          width: 4px;
-	          height: 4px;
+	        > view {
+	          width: 8upx;
+	          height: 8upx;
 	          background-color: #ffffff;
 	          display: block;
 	          centent: ' ';
-	          border-radius: 4px;
+	          border-radius: 8upx;
 	        }
 	      }
 	    }
@@ -113,22 +121,22 @@
 	  background-color: #FFFFFF;
 	  position: relative;
 	  .back {
-	    width: 44px;
-	    height: 44px;
+	    width: 88upx;
+	    height: 88upx;
 	    display: flex;
 	    align-items: center;
 	    justify-content: center;
 	
 	    &::after {
-	      border-top: solid 2px #000000;
-	      border-left: solid 2px #000000;
+	      border-top: solid 4upx #000000;
+	      border-left: solid 4upx #000000;
 	    }
 	  }
 	  .title{
 	    color: #000000;
 	  }
 	  .menu{
-	    >div{
+	    >view{
 	      display: none;
 	    }
 	  }

@@ -5,32 +5,7 @@
             "style": {
                 "navigationBarTitleText": "uni-app"
             }
-        },
-        {
-            "path": "pages/uni-id-users/add",
-            "style": {
-                "navigationBarTitleText": "新增"
-            }
-        },
-        {
-            "path": "pages/uni-id-users/edit",
-            "style": {
-                "navigationBarTitleText": "编辑"
-            }
-        },
-        {
-            "path": "pages/uni-id-users/list",
-            "style": {
-                "navigationBarTitleText": "列表"
-            }
-        },
-        {
-            "path": "pages/uni-id-users/detail",
-            "style": {
-                "navigationBarTitleText": "详情"
-            }
-        }
-        ,{
+        },{
             "path" : "pages/digitalMode/digitalMode",
             "style" :                                                                                    
             {

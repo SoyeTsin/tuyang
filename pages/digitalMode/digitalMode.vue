@@ -1,42 +1,45 @@
 <template>
-	<view class="content">
-		<view class="top">
-			<view class="item left" @click="intoPage(1)">
-				<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaoyazi.svg"
-					mode="aspectFit"></image>
-				<view class="text">
-					0-9数字编码
+	<view class="">
+		<Navigation :title='"数字训练"'></Navigation>
+		<view class="content">
+			<view class="top">
+				<view class="item left" @click="intoPage(1)">
+					<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaoyazi.svg"
+						mode="aspectFit"></image>
+					<view class="text">
+						0-9数字编码
+					</view>
+				</view>
+				<view class="item right">
+					<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaotiane.svg"
+						mode="aspectFit"></image>
+					<view class="text">
+						0-99数字编码
+					</view>
 				</view>
 			</view>
-			<view class="item right">
-				<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaotiane.svg"
-					mode="aspectFit"></image>
-				<view class="text">
-					0-99数字编码
+			<view class="list">
+				<view class="item item-1">
+					<image
+						src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaomifeng.svg"
+						mode="aspectFit"></image>
+					<view class="text">
+						读数训练
+					</view>
 				</view>
-			</view>
-		</view>
-		<view class="list">
-			<view class="item item-1">
-				<image
-					src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaomifeng.svg"
-					mode="aspectFit"></image>
-				<view class="text">
-					读数训练
+				<view class="item item-2">
+					<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaociwei.svg"
+						mode="aspectFit"></image>
+					<view class="text">
+						连接训练
+					</view>
 				</view>
-			</view>
-			<view class="item item-2">
-				<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaociwei.svg"
-					mode="aspectFit"></image>
-				<view class="text">
-					连接训练
-				</view>
-			</view>
-			<view class="item item-3">
-				<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaohouji.svg"
-					mode="aspectFit"></image>
-				<view class="text">
-					随机数字
+				<view class="item item-3">
+					<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaohouji.svg"
+						mode="aspectFit"></image>
+					<view class="text">
+						随机数字
+					</view>
 				</view>
 			</view>
 		</view>
@@ -44,14 +47,17 @@
 </template>
 
 <script>
+	import Navigation from '../../components/navigation.vue'
 	export default {
-		components:{},
+		components: {
+			Navigation
+		},
 		data() {
 			return {
-				
+
 			};
 		},
-		methods:{
+		methods: {
 			intoPage(e) {
 				switch (e) {
 					case 1:
@@ -72,7 +78,7 @@
 </script>
 
 <style scoped lang="scss">
-.content {
+	.content {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -155,6 +161,7 @@
 			.item-2 {
 				border: solid 2upx rgba(255, 0, 0, 0.5);
 			}
+
 			.item-3 {
 				border: solid 2upx rgba(0, 170, 0, 0.5);
 			}
