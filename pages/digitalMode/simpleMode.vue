@@ -3,9 +3,8 @@
 		<Navigation :title='"数字编码"'></Navigation>
 		<view class="list">
 			<view class="item" v-for="(item,index) in list" :key='index'>
-				<text class="text">{{index+1}} {{item.name}}</text>
-				<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaoyazi.svg"
-					mode=""></image>
+				<text class="text">{{item.number}}</text>
+				<image class="image" :src="'../../static/images/'+item.number+'.jpg'" mode="aspectFit"></image>
 			</view>
 		</view>
 	</view>
@@ -20,20 +19,41 @@
 		},
 		data() {
 			return {
+				initList:[],
 				list: []
 			};
 		},
 		mounted() {
-			this.selectNumber()
+			this.startGame()
 		},
 		methods: {
+			startGame() {
+				let initList = []
+				for (let i = 0; i < 100; i++) {
+					initList.push({
+						number: i,
+						sort: Math.floor(Math.random() * 100000),
+						endTime: 0,
+						startTime: 0
+					})
+				}
+			
+				initList.sort((a, b) => {
+					if (a.sort < b.sort) {
+						return 1
+					} else if (a.sort > b.sort) {
+						return -1
+					} else {
+						return 0
+					}
+				})
+				this.initList = initList
+				this.selectNumber()
+			},
 			selectNumber() {
 				this.list = []
 				for (let i = 0; i < 19; i++) {
-					this.list.push({
-						value: i,
-						name: '小鸭子'
-					})
+					this.list.push(this.initList[i])
 				}
 			}
 		}
