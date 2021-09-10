@@ -1,3 +1,4 @@
+
 <template>
 	<view class="reading-training">
 		<Navigation :title='"读数训练"'></Navigation>

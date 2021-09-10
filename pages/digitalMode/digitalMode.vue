@@ -1,3 +1,4 @@
+
 <template>
 	<view class="">
 		<Navigation :title='"数字训练"'></Navigation>
