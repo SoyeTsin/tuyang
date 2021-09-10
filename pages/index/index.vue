@@ -1,5 +1,5 @@
 <template>
-	<view class="content">
+	<view class="content" :style="[{ 'padding-top':docmentNodeValue.customBar + 'px'}]">
 		<view class="top">
 			<view class="item left" @click="intoPage(1)">
 				<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaoyazi.svg"
@@ -41,6 +41,11 @@
 		data() {
 			return {
 				title: 'Hello'
+			}
+		},
+		computed: {
+			docmentNodeValue() {
+				return this.$store.state.docmentNodeValue
 			}
 		},
 		onLoad() {

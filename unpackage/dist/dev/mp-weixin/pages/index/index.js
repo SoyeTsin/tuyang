@@ -183,6 +183,11 @@ var _default =
       title: 'Hello' };
 
   },
+  computed: {
+    docmentNodeValue: function docmentNodeValue() {
+      return this.$store.state.docmentNodeValue;
+    } },
+
   onLoad: function onLoad() {
 
   },

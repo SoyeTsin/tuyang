@@ -4,14 +4,16 @@
 		<view class="content">
 			<view class="top">
 				<view class="item left" @click="intoPage(1)">
-					<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaoyazi.svg"
+					<image
+						src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaoyazi.svg"
 						mode="aspectFit"></image>
 					<view class="text">
 						0-9数字编码
 					</view>
 				</view>
-				<view class="item right">
-					<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaotiane.svg"
+				<view class="item right" @click="intoPage(2)">
+					<image
+						src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaotiane.svg"
 						mode="aspectFit"></image>
 					<view class="text">
 						0-99数字编码
@@ -19,7 +21,7 @@
 				</view>
 			</view>
 			<view class="list">
-				<view class="item item-1">
+				<view class="item item-1" @click="intoPage(3)">
 					<image
 						src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaomifeng.svg"
 						mode="aspectFit"></image>
@@ -28,14 +30,16 @@
 					</view>
 				</view>
 				<view class="item item-2">
-					<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaociwei.svg"
+					<image
+						src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaociwei.svg"
 						mode="aspectFit"></image>
 					<view class="text">
 						连接训练
 					</view>
 				</view>
 				<view class="item item-3">
-					<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaohouji.svg"
+					<image
+						src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaohouji.svg"
 						mode="aspectFit"></image>
 					<view class="text">
 						随机数字
@@ -66,8 +70,14 @@
 						})
 						break;
 					case 2:
+						uni.navigateTo({
+							url: '/pages/digitalMode/complexMode'
+						})
 						break;
 					case 3:
+						uni.navigateTo({
+							url: '/pages/digitalMode/readingTraining'
+						})
 						break;
 					case 4:
 						break;

@@ -1,6 +1,7 @@
 <script>
 	export default {
-		onLaunch: function() {
+		onLaunch() {
+			const that=this
 			console.log('App Launch')
 			uni.getSystemInfo({
 				success: function(e) {
@@ -18,21 +19,22 @@
 					// #ifdef MP-WEIXIN  
 					let custom = wx.getMenuButtonBoundingClientRect()
 					customBar = custom.bottom + custom.top - e.statusBarHeight
+					// customBar = custom.bottom - custom.top 
 					// #endif  
 
 					// #ifdef MP-ALIPAY  
 					customBar = e.statusBarHeight + e.titleBarHeight
 					// #endif  
-					this.$store.commit('setDocmentNodeValue',{
+					that.$store.commit('setDocmentNodeValue',{
 						statusBar,customBar
 					})
 				}
 			})
 		},
-		onShow: function() {
+		onShow() {
 			console.log('App Show')
 		},
-		onHide: function() {
+		onHide() {
 			console.log('App Hide')
 		}
 	}

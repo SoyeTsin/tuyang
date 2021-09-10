@@ -1,6 +1,6 @@
 <template>
 	<view class="top-nav active"
-		:style="[{'height': customBarH + 'px', 'padding-top': statusBarH + 'px'}]">
+		:style="[{'padding-top': docmentNodeValue.statusBar + 'px'}]">
 		<view class="content">
 			<view class="back" @click="back"></view>
 			<view class="title">{{title}}</view>
@@ -23,7 +23,6 @@
 		},
 		computed:{
 			docmentNodeValue(){
-				debugger
 				return this.$store.state.docmentNodeValue
 			}
 		},
@@ -52,7 +51,6 @@
 		top: 0;
 		left: 0;
 		z-index: 100;
-		background-color:#007AFF;
 		
 		.content {
 			width: 100vw;
@@ -80,7 +78,7 @@
 
 			.title {
 				flex: 1;
-				font-size: 17upx;
+				font-size: 34upx;
 				font-family: PingFangSC-Regular, PingFang SC;
 				font-weight: 400;
 				color: #FFFFFF;

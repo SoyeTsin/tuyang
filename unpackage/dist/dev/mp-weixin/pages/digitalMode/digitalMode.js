@@ -130,7 +130,11 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Navigation = function Navigation() {__webpack_require__.e(/*! require.ensure | components/navigation */ "components/navigation").then((function () {return resolve(__webpack_require__(/*! ../../components/navigation.vue */ 38));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Navigation = function Navigation() {__webpack_require__.e(/*! require.ensure | components/navigation */ "components/navigation").then((function () {return resolve(__webpack_require__(/*! ../../components/navigation.vue */ 46));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
 
 
 
@@ -198,6 +202,9 @@ __webpack_require__.r(__webpack_exports__);
 
           break;
         case 2:
+          uni.navigateTo({
+            url: '/pages/digitalMode/complexMode' });
+
           break;
         case 3:
           break;

@@ -19,38 +19,22 @@
 		},
 		data() {
 			return {
-				list: [{
-					value: 0,
-					name: '小鸭子'
-				}, {
-					value: 1,
-					name: '小鸭子'
-				}, {
-					value: 2,
-					name: '小鸭子'
-				}, {
-					value: 3,
-					name: '小鸭子'
-				}, {
-					value: 4,
-					name: '小鸭子'
-				}, {
-					value: 5,
-					name: '小鸭子'
-				}, {
-					value: 6,
-					name: '小鸭子'
-				}, {
-					value: 7,
-					name: '小鸭子'
-				}, {
-					value: 8,
-					name: '小鸭子'
-				}, {
-					value: 9,
-					name: '小鸭子'
-				}, ]
+				list: []
 			};
+		},
+		mounted() {
+			this.selectNumber()
+		},
+		methods: {
+			selectNumber() {
+				this.list = []
+				for (let i = 0; i < 19; i++) {
+					this.list.push({
+						value: i,
+						name: '小鸭子'
+					})
+				}
+			}
 		}
 	}
 </script>

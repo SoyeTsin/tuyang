@@ -22,6 +22,22 @@
                 "enablePullDownRefresh": false
             }
             
+        },{
+            "path" : "pages/digitalMode/complexMode",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        },{
+            "path" : "pages/digitalMode/readingTraining",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
         }
     ],
     "globalStyle": {
