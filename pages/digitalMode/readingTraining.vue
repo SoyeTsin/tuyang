@@ -18,7 +18,7 @@
 		</view>
 		<view class="play-content" v-if="showStatus===2" @click="changeShowStatus(3)">
 			<view class="title">
-				0/100
+				{{process}}/100
 			</view>
 			<view class="number">
 				{{playNumber}}
@@ -43,9 +43,10 @@
 			return {
 				showStatus: 0,
 				list: [],
-				countownDNumber: 4,
+				countownDNumber: 3,
 				playNumber: '',
-				countownDNumberetInterval: null
+				countownDNumberetInterval: null,
+				process:0
 			};
 		},
 		mounted() {},
@@ -57,7 +58,7 @@
 				}
 			},
 			startCountownDNumber() {
-				this.countownDNumber = 4
+				this.countownDNumber = 3
 				this.countownDNumberetInterval = setInterval(() => {
 					this.countownDNumber--
 					if (this.countownDNumber <= 0) {
