@@ -7,7 +7,7 @@
 					数字记忆
 				</view>
 			</view>
-			<view class="item right">
+			<view class="item right"  @click="intoPage(2)">
 				<view class="iconfont icon-zimu" style="color: #f8bc5e;"></view>
 				<view class="text">
 					字母编码
@@ -15,13 +15,13 @@
 			</view>
 		</view>
 		<view class="list">
-			<view class="item item-1">
+			<view class="item item-1"  @click="intoPage(3)">
 				<view class="iconfont icon-jiyi" style="color: rgba(52, 216, 198, 0.5);"></view>
 				<view class="text" style="color: rgba(52, 216, 198, 0.5);">
 					记忆宫殿
 				</view>
 			</view>
-			<view class="item item-2">
+			<view class="item item-2"  @click="intoPage(4)">
 				<view class="iconfont icon-nao" style="color: rgba(255, 0, 0, 0.5);"></view>
 				<view class="text" style="color: rgba(255, 0, 0, 0.5);">
 					左右脑协调性测试
@@ -52,8 +52,7 @@
 					}
 				})
 				.then(res => {
-					debugger
-					console.log()
+					console.log(res)
 				});
 		},
 		methods: {
@@ -69,6 +68,9 @@
 					case 3:
 						break;
 					case 4:
+					uni.navigateTo({
+						url: '../coordinate/coordinate'
+					})
 						break;
 				}
 			},

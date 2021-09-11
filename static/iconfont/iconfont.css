@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id  */
-  src: url('~@/static/iconfont/iconfont.ttf');
+   src: url('~@/static/iconfont/iconfont.ttf');
 }
 
 .iconfont {
@@ -11,8 +11,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-shuzi9:before {
-  content: "\e62e";
+.icon-dianji:before {
+  content: "\f02c7";
+}
+
+.icon-huangguan:before {
+  content: "\e71c";
 }
 
 .icon-jiyi:before {
@@ -20,10 +24,6 @@
 }
 
 .icon-shuzi:before {
-  content: "\e618";
-}
-
-.icon-shuzi1:before {
   content: "\e8c4";
 }
 
@@ -47,7 +47,7 @@
   content: "\e702";
 }
 
-.icon-shuzi2:before {
+.icon-shuzi1:before {
   content: "\e640";
 }
 
