@@ -39,7 +39,7 @@
 				</view>
 			</view>
 			<view class="button">
-				<view class="play">
+				<view class="play" @click="changeShowStatus(1)">
 					开始游戏
 				</view>
 				<view class="share">
@@ -56,6 +56,23 @@
 		<view class="count-down" v-if="showStatus===1">
 			{{countownDNumber}}
 		</view>
+		<view class="play-content" v-if="showStatus===2">
+			<view class="time-content">
+				<view class="time">
+					{{playEndTime}}s
+				</view>
+				<view class="number">
+					0
+				</view>
+			</view>
+			<view class="color-content">
+				<view class="explain-item" v-for="(item,index) in nowColorArr" :key='index'>
+					<view class="circular" :style="{backgroundColor:item.color}">
+						{{item.name}}
+					</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -68,14 +85,163 @@
 		data() {
 			return {
 				showStatus: 0,
-				countownDNumber: 3
+				countownDNumber: 3,
+				countownDNumberetInterval: null,
+				playEndTime: 30, //游戏结束时间
+				initList: [{
+					name: '蓝',
+					color: '#1d2089'
+				}, {
+					name: '黑',
+					color: '#000000'
+				}, {
+					name: '紫',
+					color: '#920784'
+				}, {
+					name: '黄',
+					color: '#ffef01'
+				}, {
+					name: '绿',
+					color: '#009a44'
+				}, {
+					name: '红',
+					color: '#e70012'
+				}],
+				nowColorArr: [],
+				myList: [], //暂存
 			};
+		},
+		methods: {
+			changeShowStatus(e) {
+				this.showStatus = e
+				if (e === 1) {
+					this.startCountownDNumber()
+				}
+			},
+			startCountownDNumber() {
+				this.countownDNumber = 1
+				this.countownDNumberetInterval = setInterval(() => {
+					this.countownDNumber--
+					if (this.countownDNumber <= 0) {
+						this.changeShowStatus(2)
+						this.initNowColorList()
+						clearInterval(this.countownDNumberetInterval)
+					}
+				}, 1000)
+			},
+			initNowColorList() {
+				//初始化当前的颜色测试单元
+				//**从列表随机取一个正确的
+				let index = Math.floor(Math.random() * 6)
+				this.myList = [...this.initList]
+				let trueColor = {
+					...this.myList[index],
+					ifRight: true
+				}
+				//标记此对象name和color已被使用
+				this.myList[index].nameUsed = true
+				this.myList[index].colorUsed = true
+				//**随机取三个错误的
+				let errColor = []
+				for (let i = 0; i < 3; i++) {
+					errColor.push({
+						ifRight: false
+					})
+				}
+				this.nowColorArr = [trueColor, ...errColor]
+				for (let i in this.nowColorArr) {
+					let nameIindex = Math.floor(Math.random() * 6)
+					let colorIindex = Math.floor(Math.random() * 6)
+					this.nowColorArr[i].name = this.errorColor('name', nameIindex, i)
+					this.nowColorArr[i].color = this.errorColor('color', nameIindex, i)
+				}
+				//组合成一个当前测试的数组
+
+				console.log(this.initList)
+				console.log(this.nowColorArr)
+			},
+			errorColor(type, index,i) {
+				console.log(type + ':' + index)
+				const that = this
+				let myVal = null
+				//返回一个没被使用的错误index
+				if (!!that.myList[index][`${type}Used`]) {
+					that.errorColor(type, (index + 1) % 6)
+				} else {
+					that.myList[index][`${type}Used`] = true
+					this.nowColorArr[i][type] = that.myList[index][type]
+				}
+			}
 		}
 	}
 </script>
 
 <style scoped lang="scss">
-	.play-ready {
+	.play-content {
+		width: 100vw;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+
+		.color-content {
+			width: 600upx;
+			height: 600upx;
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+
+			.explain-item {
+				width: 50%;
+				height: 50%;
+				display: flex;
+				justify-content: center;
+				text-align: center;
+				line-height: 100%;
+
+
+				.circular {
+					width: 200upx;
+					height: 200upx;
+					border-radius: 100%;
+					line-height: 200upx;
+					text-align: center;
+					text-shadow: 0 0 6upx #333333;
+					font-weight: 700;
+					font-size: 60upx;
+					color: #FFFFFF;
+				}
+
+			}
+		}
+
+		.time-content {
+			width: 100vw;
+			height: 160upx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			position: absolute;
+			top: 120upx;
+
+			.number {
+				font-weight: 600;
+				font-size: 50upx;
+				color: #77ff7c;
+			}
+		}
+	}
+
+	.count-down {
+		color: #FFFFFF;
+		line-height: 100%;
+		font-size: 80upx;
+	}
+
+	.play-ready,
+	.count-down {
 		width: 100vw;
 		height: 100vh;
 		background-image: linear-gradient(to top, #4ccbf1, #6bb5ff);
