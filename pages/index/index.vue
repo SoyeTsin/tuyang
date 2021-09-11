@@ -2,15 +2,13 @@
 	<view class="content" :style="[{ 'padding-top':docmentNodeValue.customBar + 'px'}]">
 		<view class="top">
 			<view class="item left" @click="intoPage(1)">
-				<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaoyazi.svg"
-					mode="aspectFit"></image>
+				<view class="iconfont icon-shuzi1" style="color: #55aaff;"></view>
 				<view class="text">
 					数字记忆
 				</view>
 			</view>
 			<view class="item right">
-				<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaotiane.svg"
-					mode="aspectFit"></image>
+				<view class="iconfont icon-zimu" style="color: #f8bc5e;"></view>
 				<view class="text">
 					字母编码
 				</view>
@@ -18,17 +16,14 @@
 		</view>
 		<view class="list">
 			<view class="item item-1">
-				<image
-					src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaomifeng.svg"
-					mode="aspectFit"></image>
-				<view class="text">
+				<view class="iconfont icon-jiyi" style="color: rgba(52, 216, 198, 0.5);"></view>
+				<view class="text" style="color: rgba(52, 216, 198, 0.5);">
 					记忆宫殿
 				</view>
 			</view>
 			<view class="item item-2">
-				<image src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaociwei.svg"
-					mode="aspectFit"></image>
-				<view class="text">
+				<view class="iconfont icon-nao" style="color: rgba(255, 0, 0, 0.5);"></view>
+				<view class="text" style="color: rgba(255, 0, 0, 0.5);">
 					左右脑协调性测试
 				</view>
 			</view>
@@ -49,7 +44,17 @@
 			}
 		},
 		onLoad() {
-
+			// promise方式
+			uniCloud.callFunction({
+					name: 'test',
+					data: {
+						a: 1
+					}
+				})
+				.then(res => {
+					debugger
+					console.log()
+				});
 		},
 		methods: {
 			intoPage(e) {
@@ -80,6 +85,15 @@
 		padding: 60upx;
 		box-sizing: border-box;
 
+		.iconfont {
+			display: block;
+			width: 250upx;
+			height: 200upx;
+			line-height: 200upx;
+			font-size: 150upx;
+			text-align: center;
+		}
+
 		.top {
 			width: 100%;
 			display: flex;
@@ -93,12 +107,6 @@
 				justify-content: center;
 				flex-direction: column;
 				align-items: center;
-
-				image {
-					width: 250upx;
-					height: 200upx;
-					margin-bottom: 24upx;
-				}
 
 				.text {
 					font-size: 36upx;

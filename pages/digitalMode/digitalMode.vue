@@ -1,21 +1,20 @@
-
 <template>
 	<view class="">
 		<Navigation :title='"数字训练"'></Navigation>
 		<view class="content">
 			<view class="top">
 				<view class="item left" @click="intoPage(1)">
-					<image
-						src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaoyazi.svg"
-						mode="aspectFit"></image>
+					<view class="icon">
+						<text  style="color: #55aaff;">0-9</text>
+					</view>
 					<view class="text">
 						0-9数字编码
 					</view>
 				</view>
 				<view class="item right" @click="intoPage(2)">
-					<image
-						src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaotiane.svg"
-						mode="aspectFit"></image>
+					<view class="icon">
+						<text  style="color: #f8bc5e;">0-99</text>
+					</view>
 					<view class="text">
 						0-99数字编码
 					</view>
@@ -23,26 +22,20 @@
 			</view>
 			<view class="list">
 				<view class="item item-1" @click="intoPage(3)">
-					<image
-						src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaomifeng.svg"
-						mode="aspectFit"></image>
-					<view class="text">
+					<view class="iconfont icon-miaobiao" style="color: rgba(52, 216, 198, 0.5);"></view>
+					<view class="text" style="color: rgba(52, 216, 198, 0.5);">
 						读数训练
 					</view>
 				</view>
 				<view class="item item-2">
-					<image
-						src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaociwei.svg"
-						mode="aspectFit"></image>
-					<view class="text">
+					<view class="iconfont icon-lianjie" style="color: rgba(255, 0, 0, 0.5);"></view>
+					<view class="text" style="color: rgba(255, 0, 0, 0.5);">
 						连接训练
 					</view>
 				</view>
 				<view class="item item-3">
-					<image
-						src="https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/xiaohouji.svg"
-						mode="aspectFit"></image>
-					<view class="text">
+					<view class="iconfont icon-touzi" style="color: rgba(0, 170, 0, 0.5);"></view>
+					<view class="text" style="color: rgba(0, 170, 0, 0.5);">
 						随机数字
 					</view>
 				</view>
@@ -97,6 +90,15 @@
 		padding: 60upx;
 		box-sizing: border-box;
 
+		.iconfont {
+			display: block;
+			width: 250upx;
+			height: 200upx;
+			line-height: 200upx;
+			font-size: 150upx;
+			text-align: center;
+		}
+
 		.top {
 			width: 100%;
 			display: flex;
@@ -111,10 +113,27 @@
 				flex-direction: column;
 				align-items: center;
 
-				image {
+				.icon {
 					width: 250upx;
 					height: 200upx;
 					margin-bottom: 24upx;
+					display: flex;
+					align-items: center;
+					.iconfont {
+						display: block;
+						height: 100upx;
+						line-height: 100upx;
+						font-size: 80upx;
+						text-align: center;
+					}
+					text{
+						display: block;
+						height: 100upx;
+						line-height: 100upx;
+						font-size: 80upx;
+						text-align: center;
+						width: 100%;
+					}
 				}
 
 				.text {
