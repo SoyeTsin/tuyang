@@ -56,8 +56,8 @@
 		<view class="count-down" v-if="showStatus===1">
 			{{countownDNumber}}
 		</view>
-		<view class="play-content" v-if="showStatus===2">
-			<view class="time-content">
+		<view :class="playContentClassNames" v-if="showStatus===2" ref='playContent'>
+			<view class="time-content" :style="{paddingTop:docmentNodeValue.statusBar + 'px'}">
 				<view class="time">
 					{{playEndTime}}s
 				</view>
@@ -67,7 +67,7 @@
 			</view>
 			<view class="color-content">
 				<view class="explain-item" v-for="(item,index) in nowColorArr" :key='index'>
-					<view class="circular" :style="{backgroundColor:item.color}">
+					<view class="circular" :style="{backgroundColor:item.color}" @click="selectCircular(item)">
 						{{item.name}}
 					</view>
 				</view>
@@ -82,36 +82,69 @@
 		components: {
 			Navigation
 		},
+		computed: {
+			docmentNodeValue() {
+				return this.$store.state.docmentNodeValue
+			}
+		},
 		data() {
 			return {
 				showStatus: 0,
 				countownDNumber: 3,
 				countownDNumberetInterval: null,
 				playEndTime: 30, //游戏结束时间
+				playContentClassNames: 'play-content',
 				initList: [{
 					name: '蓝',
-					color: '#1d2089'
+					color: '#1d2089',
+					nameUsed: false,
+					colorUsed: false
 				}, {
 					name: '黑',
-					color: '#000000'
+					color: '#000000',
+					nameUsed: false,
+					colorUsed: false
 				}, {
 					name: '紫',
-					color: '#920784'
+					color: '#920784',
+					nameUsed: false,
+					colorUsed: false
 				}, {
 					name: '黄',
-					color: '#ffef01'
+					color: '#ffef01',
+					nameUsed: false,
+					colorUsed: false
 				}, {
 					name: '绿',
-					color: '#009a44'
+					color: '#009a44',
+					nameUsed: false,
+					colorUsed: false
 				}, {
 					name: '红',
-					color: '#e70012'
+					color: '#e70012',
+					nameUsed: false,
+					colorUsed: false
 				}],
 				nowColorArr: [],
 				myList: [], //暂存
+				selectedList: [], //结果
 			};
 		},
 		methods: {
+			selectCircular(item) {
+				//如果答案正确
+				if (item.ifRight) {
+					this.selectedList.push({
+						endTime: (new Date()).getTime(),
+						...item
+					})
+				} else {
+					this.playContentClassNames = 'play-content error'
+					setTimeout(() => {
+						this.playContentClassNames = 'play-content'
+					}, 500)
+				}
+			},
 			changeShowStatus(e) {
 				this.showStatus = e
 				if (e === 1) {
@@ -136,7 +169,8 @@
 				this.myList = [...this.initList]
 				let trueColor = {
 					...this.myList[index],
-					ifRight: true
+					ifRight: true,
+					startTime: (new Date()).getTime()
 				}
 				//标记此对象name和color已被使用
 				this.myList[index].nameUsed = true
@@ -145,31 +179,36 @@
 				let errColor = []
 				for (let i = 0; i < 3; i++) {
 					errColor.push({
-						ifRight: false
+						id: 0,
+						ifRight: false,
+						nameUsed: false,
+						colorUsed: false
 					})
 				}
+				//组合成一个当前测试的数组
 				this.nowColorArr = [trueColor, ...errColor]
 				for (let i in this.nowColorArr) {
-					let nameIindex = Math.floor(Math.random() * 6)
-					let colorIindex = Math.floor(Math.random() * 6)
-					this.nowColorArr[i].name = this.errorColor('name', nameIindex, i)
-					this.nowColorArr[i].color = this.errorColor('color', nameIindex, i)
+					this.nowColorArr[i].name = await this.errorColor('name');
+					this.nowColorArr[i].color = await this.errorColor('color');
 				}
-				//组合成一个当前测试的数组
-
-				console.log(this.initList)
-				console.log(this.nowColorArr)
 			},
-			errorColor(type, index,i) {
-				console.log(type + ':' + index)
-				const that = this
-				let myVal = null
-				//返回一个没被使用的错误index
-				if (!!that.myList[index][`${type}Used`]) {
-					that.errorColor(type, (index + 1) % 6)
+			async errorColor(type) {
+				this.myList.sort((a, b) => {
+					return Math.random() > .5 ? -1 : 1
+				})
+				let obj = this.myList.find((item, index) => {
+					if (item[`${type}Used`] === false) {
+						this.myList[index][`${type}Used`] = true
+						return true
+					} else {
+						return false
+					}
+
+				})
+				if (obj) {
+					return obj[type]
 				} else {
-					that.myList[index][`${type}Used`] = true
-					this.nowColorArr[i][type] = that.myList[index][type]
+					return null
 				}
 			}
 		}
@@ -184,6 +223,10 @@
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
+
+		&.error {
+			box-shadow: 0 -60upx 80upx 40upx rgba(231, 0, 18, 0.37) inset;
+		}
 
 		.color-content {
 			width: 600upx;
@@ -224,7 +267,8 @@
 			align-items: center;
 			flex-direction: column;
 			position: absolute;
-			top: 120upx;
+			top: 180upx;
+			box-sizing: border-box;
 
 			.number {
 				font-weight: 600;
