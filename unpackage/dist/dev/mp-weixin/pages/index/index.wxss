@@ -41,6 +41,14 @@
   padding: 60rpx;
   box-sizing: border-box;
 }
+.content .iconfont.data-v-57280228 {
+  display: block;
+  width: 250rpx;
+  height: 200rpx;
+  line-height: 200rpx;
+  font-size: 150rpx;
+  text-align: center;
+}
 .content .top.data-v-57280228 {
   width: 100%;
   display: -webkit-box;
@@ -67,11 +75,6 @@
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
-}
-.content .top .item image.data-v-57280228 {
-  width: 250rpx;
-  height: 200rpx;
-  margin-bottom: 24rpx;
 }
 .content .top .item .text.data-v-57280228 {
   font-size: 36rpx;
