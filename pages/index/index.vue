@@ -47,7 +47,7 @@
 			// promise方式
 			// #ifdef MP-WEIXIN
 			uniCloud.callFunction({
-					name: 'getWXmpQRcode',
+					name: 'code2Session',
 				})
 				.then(res => {
 					console.log(res)
