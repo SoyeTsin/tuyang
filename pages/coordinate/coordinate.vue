@@ -1,6 +1,7 @@
 <template>
 	<view class="coordinate">
-		<Navigation :title='"左右脑协调性测试"'></Navigation>
+		<!-- 左右脑协调性测试 -->
+		<Navigation :title='"Demo"'></Navigation>
 		<view class="play-ready" v-if="showStatus===0">
 			<view class="content">
 				<view class="tips-title">
@@ -62,22 +63,28 @@
 					{{playEndTime}}s
 				</view>
 				<view class="number">
-					0
+					{{selectedList.length}}
 				</view>
 			</view>
 			<view class="color-content">
 				<view class="explain-item" v-for="(item,index) in nowColorArr" :key='index'>
+					{{item.ifRight}}
 					<view class="circular" :style="{backgroundColor:item.color}" @click="selectCircular(item)">
 						{{item.name}}
 					</view>
 				</view>
 			</view>
 		</view>
+		<!-- 计算结果 -->
+		<view class="school-report">
+			<canvas style="height: 100%;width: 100%;backgroundColor: #ffffff" canvas-id="myCanvas"></canvas>
+		</view>
 	</view>
 </template>
 
 <script>
 	import Navigation from '../../components/navigation.vue'
+	import danao from '../../static/danao.png'
 	export default {
 		components: {
 			Navigation
@@ -89,7 +96,7 @@
 		},
 		data() {
 			return {
-				showStatus: 0,
+				showStatus: 3,
 				countownDNumber: 3,
 				countownDNumberetInterval: null,
 				playEndTime: 30, //游戏结束时间
@@ -128,9 +135,132 @@
 				nowColorArr: [],
 				myList: [], //暂存
 				selectedList: [], //结果
+				danao,
 			};
 		},
+		onLoad() {
+			setTimeout(() => {
+				this.createPlacard()
+			}, 300)
+		},
 		methods: {
+			initCanvas() {
+				let ctx = uni.createCanvasContext('myCanvas');
+				ctx.fillStyle = "#55aaff";
+				this.circleImgOne(ctx, danao, uni.upx2px(175), uni.upx2px(95), uni.upx2px(200));
+				ctx.draw();
+			},
+			// 开始制作头像
+			createPlacard() {
+				uni.getImageInfo({
+					src: danao, // 网络图片需先下载，得到临时本地路径，否则绘入 Canvas 可能会出现空白
+					success: (img) => {
+						const ctx = wx.createCanvasContext('myCanvas', this);
+						ctx.fillStyle = "#00aa7f";
+						ctx.fillRect(0, 0, uni.upx2px(750), uni.upx2px(1334));
+
+
+						//画logo
+						ctx.save()
+						ctx.drawImage(img.path, uni.upx2px(275), uni.upx2px(
+							40), uni.upx2px(200), uni.upx2px(200));
+						ctx.restore()
+						// 在位置 150 创建蓝线
+						ctx.save()
+						ctx.strokeStyle = "blue";
+						ctx.moveTo(uni.upx2px(375), 20);
+						ctx.lineTo(uni.upx2px(375), 1070);
+						ctx.stroke();
+						ctx.restore()
+						//画文字
+						ctx.font = (uni.upx2px(60) + "px serif");
+						ctx.fillStyle = '#FFFFFF'; // 文字填充颜色
+						ctx.textAlign = "center";
+						ctx.textBaseline = "middle";
+						ctx.fillText("中中中", uni.upx2px(375), uni.upx2px(250));
+						//画方框
+						ctx.fillStyle = '#ffffff';
+						// ctx.fillRect(uni.upx2px((750-650)/2), 200, uni.upx2px(650), 100);
+						this.circleImgTwo(ctx, uni.upx2px((750 - 600) / 2), uni.upx2px(320), uni.upx2px(600),
+							uni.upx2px(600), uni.upx2px(20), uni.upx2px(10));
+						this.circleImgTwo(ctx, uni.upx2px((750 - 600) / 2), uni.upx2px(924), uni.upx2px(600),
+							uni.upx2px(300), uni.upx2px(20), uni.upx2px(10));
+						//画两个小圆形作为两个边框的缺口
+						ctx.save()
+						ctx.beginPath();
+						// ctx.moveTo(10,uni.upx2px(924))
+						ctx.arc(uni.upx2px(74), uni.upx2px(922), uni.upx2px(20), 0, 2 * Math.PI);
+						ctx.moveTo(uni.upx2px(670), uni.upx2px(924));
+						ctx.arc(uni.upx2px(674), uni.upx2px(922), uni.upx2px(20), 0, 2 * Math.PI);
+						ctx.fillStyle = '#00aa7f'; // 设置绘制圆形边框的颜色
+						ctx.fill();
+						ctx.restore();
+						//画头像
+						ctx.beginPath();
+						this.circleImgOne(ctx, img.path, uni.upx2px(114), uni.upx2px(360), uni.upx2px(50))
+						//画昵称
+						ctx.save();
+						ctx.font = (uni.upx2px(36) + "px serif");
+						ctx.fillStyle = '#000000'; // 文字填充颜色
+						ctx.textAlign = "left";
+						ctx.textBaseline = "middle";
+						ctx.fillText("中中中", uni.upx2px(220), uni.upx2px(410));
+						ctx.restore();
+						//画大括号
+						this.braces(ctx,uni.upx2px(40),uni.upx2px(40))
+						ctx.draw();
+					}
+				})
+			},
+			braces(ctx, x, y){
+				ctx.save()
+				ctx.beginPath();
+				ctx.lineTo(x, y);
+				ctx.lineTo(x+10, y);
+				ctx.restore();
+			},
+			/*
+			 *  参数说明
+			 *  ctx Canvas实例
+			 *  img 图片地址
+			 *   x  x轴坐标
+			 *   y  y轴坐标
+			 *   r  圆形半径
+			 */
+			circleImgOne(ctx, img, x, y, r) {
+				// 如果在绘制图片之后还有需要绘制别的元素，需启动 save() 、restore() 方法，否则 clip() 方法会导致之后元素都不可见
+				//    save()：保存当前 Canvas 画布状态
+				// restore()：恢复到保存时的状态
+				ctx.save();
+				let d = r * 2;
+				let cx = x + r;
+				let cy = y + r;
+				ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+				ctx.strokeStyle = '#FFFFFF'; // 设置绘制圆形边框的颜色
+				ctx.stroke(); // 绘制出圆形，默认为黑色，可通过 ctx.strokeStyle = '#FFFFFF'， 设置想要的颜色
+				ctx.clip();
+				ctx.drawImage(img, x, y, d, d);
+				ctx.restore();
+			},
+			circleImgTwo(ctx, x, y, w, h, r) {
+				// 画一个图形
+				ctx.save();
+				if (w < 2 * r) r = w / 2;
+				if (h < 2 * r) r = h / 2;
+				ctx.beginPath();
+				ctx.moveTo(x + r, y);
+				ctx.arcTo(x + w, y, x + w, y + h, r);
+				ctx.arcTo(x + w, y + h, x, y + h, r);
+				ctx.arcTo(x, y + h, x, y, r);
+				ctx.arcTo(x, y, x + w, y, r);
+				ctx.closePath();
+				ctx.strokeStyle = '#FFFFFF'; // 设置绘制圆形边框的颜色
+				ctx.stroke();
+				ctx.clip();
+				ctx.fillStyle = "#ffffff"; //设置填充颜色
+				ctx.fill(); //开始填充
+				ctx.restore();
+			},
 			selectCircular(item) {
 				//如果答案正确
 				if (item.ifRight) {
@@ -144,6 +274,17 @@
 						this.playContentClassNames = 'play-content'
 					}, 500)
 				}
+				this.initNowColorList()
+			},
+			playEndTimeFunc() {
+				this.playEndTimeInterval = setInterval(() => {
+					this.playEndTime--
+					if (this.playEndTime <= 0) {
+						//game over
+						this.showStatus = 3
+					}
+					clearInterval(this.playEndTimeInterval)
+				}, 1000)
 			},
 			changeShowStatus(e) {
 				this.showStatus = e
@@ -156,8 +297,10 @@
 				this.countownDNumberetInterval = setInterval(() => {
 					this.countownDNumber--
 					if (this.countownDNumber <= 0) {
+						//倒计时结束，开始游戏
 						this.changeShowStatus(2)
 						this.initNowColorList()
+						this.playEndTimeFunc()
 						clearInterval(this.countownDNumberetInterval)
 					}
 				}, 1000)
@@ -166,10 +309,12 @@
 				//初始化当前的颜色测试单元
 				//**从列表随机取一个正确的
 				let index = Math.floor(Math.random() * 6)
-				this.myList = [...this.initList]
+				this.myList = JSON.parse(JSON.stringify(this.initList))
 				let trueColor = {
 					...this.myList[index],
 					ifRight: true,
+					nameUsed: true,
+					colorUsed: true,
 					startTime: (new Date()).getTime()
 				}
 				//标记此对象name和color已被使用
@@ -187,35 +332,64 @@
 				}
 				//组合成一个当前测试的数组
 				this.nowColorArr = [trueColor, ...errColor]
-				for (let i in this.nowColorArr) {
-					this.nowColorArr[i].name = await this.errorColor('name');
-					this.nowColorArr[i].color = await this.errorColor('color');
+				const that = this
+				for (let i = 0; i < that.nowColorArr.length; i++) {
+					if (that.nowColorArr[i].ifRight != true) {
+						that.errorColor('name', null, i, (resNameObj, nameIndex) => {
+							that.nowColorArr[nameIndex].name = resNameObj.name
+							that.errorColor('color', resNameObj, nameIndex, (resColorObj, colorIndex) => {
+								that.nowColorArr[colorIndex].color = resColorObj.color
+							});
+						});
+					}
 				}
+				//打乱排序
+				that.nowColorArr = that.randSort(that.nowColorArr)
 			},
-			async errorColor(type) {
-				this.myList.sort((a, b) => {
-					return Math.random() > .5 ? -1 : 1
-				})
+			errorColor(type, oldObj = {}, errorIndex, cb) {
+				this.myList = this.randSort(this.myList)
 				let obj = this.myList.find((item, index) => {
 					if (item[`${type}Used`] === false) {
-						this.myList[index][`${type}Used`] = true
-						return true
+						if (oldObj) {
+							if (oldObj.nameUsed && item.name === oldObj.name) {
+								return false
+							} else {
+								this.myList[index][`${type}Used`] = true
+								return true
+							}
+						} else {
+							this.myList[index][`${type}Used`] = true
+							return true
+						}
 					} else {
 						return false
 					}
-
 				})
 				if (obj) {
-					return obj[type]
+					cb(obj, errorIndex)
 				} else {
-					return null
+					cb(null, errorIndex)
 				}
+			},
+			randSort(arr) {
+				for (var i = 0, len = arr.length; i < len; i++) {
+					var rand = parseInt(Math.random() * len);
+					var temp = arr[rand];
+					arr[rand] = arr[i];
+					arr[i] = temp;
+				}
+				return arr;
 			}
 		}
 	}
 </script>
 
 <style scoped lang="scss">
+	.school-report {
+		width: 100vw;
+		height: 100vh;
+	}
+
 	.play-content {
 		width: 100vw;
 		height: 100vh;
