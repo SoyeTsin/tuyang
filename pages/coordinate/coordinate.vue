@@ -96,7 +96,7 @@
 		},
 		data() {
 			return {
-				showStatus: 3,
+				showStatus: 0,
 				countownDNumber: 3,
 				countownDNumberetInterval: null,
 				playEndTime: 30, //游戏结束时间
@@ -165,13 +165,6 @@
 						ctx.drawImage(img.path, uni.upx2px(275), uni.upx2px(
 							40), uni.upx2px(200), uni.upx2px(200));
 						ctx.restore()
-						// 在位置 150 创建蓝线
-						ctx.save()
-						ctx.strokeStyle = "blue";
-						ctx.moveTo(uni.upx2px(375), 20);
-						ctx.lineTo(uni.upx2px(375), 1070);
-						ctx.stroke();
-						ctx.restore()
 						//画文字
 						ctx.font = (uni.upx2px(60) + "px serif");
 						ctx.fillStyle = '#FFFFFF'; // 文字填充颜色
@@ -207,16 +200,55 @@
 						ctx.fillText("中中中", uni.upx2px(220), uni.upx2px(410));
 						ctx.restore();
 						//画大括号
-						this.braces(ctx,uni.upx2px(40),uni.upx2px(40))
+						this.braces(ctx, uni.upx2px(140), uni.upx2px(540))
+						//文字内容
+						ctx.font = 'normal bold ' + uni.upx2px(30) + 'px Arial,sans-serif '
+						ctx.fillStyle = '#000000'; // 文字填充颜色
+						ctx.textAlign = "center";
+						ctx.textBaseline = "middle";
+						ctx.fillText("我的大脑协调性", uni.upx2px(300), uni.upx2px(620));
+						ctx.fillText("分", uni.upx2px(500), uni.upx2px(698));
+						ctx.fillText("击败了全国              的用户", uni.upx2px(375), uni.upx2px(760));
+						ctx.fillStyle = '#ff5500'; // 文字填充颜色
+						ctx.textAlign = "right";
+						ctx.font = 'normal bold ' + uni.upx2px(60) + 'px Arial,sans-serif '
+						ctx.fillText("285644", uni.upx2px(450), uni.upx2px(690));
+						ctx.font = 'normal bold ' + uni.upx2px(40) + 'px Arial,sans-serif '
+						ctx.textAlign = "center";
+						ctx.fillText("100%", uni.upx2px(405), uni.upx2px(760));
+						ctx.restore();
+						// 渲染二维码
+						
 						ctx.draw();
 					}
 				})
 			},
-			braces(ctx, x, y){
+			braces(ctx, x, y) {
 				ctx.save()
+				// 填充三角形
+				let m = 0
+				let n = 0
+				ctx.fillStyle = '#00aa7f';
+
 				ctx.beginPath();
-				ctx.lineTo(x, y);
-				ctx.lineTo(x+10, y);
+				ctx.moveTo(x, y);
+				ctx.lineTo(x + 30 + m, y + n);
+				ctx.lineTo(x + 30 + m, y + 10 + n);
+				ctx.lineTo(x + 10 + m, y + 10 + n);
+				ctx.lineTo(x + 10 + m, y + 20 + n);
+				ctx.lineTo(x + m, y + 20 + n);
+				ctx.lineTo(x + m, y + n);
+				ctx.fill();
+				m = 200
+				n = 150
+				ctx.beginPath();
+				ctx.lineTo(x + m, y + n);
+				ctx.lineTo(x + 30 + m, y + n);
+				ctx.lineTo(x + 30 + m, y - 20 + n);
+				ctx.lineTo(x + 20 + m, y - 20 + n);
+				ctx.lineTo(x + 20 + m, y - 10 + n);
+				ctx.lineTo(x + m, y - 10 + n);
+				ctx.fill();
 				ctx.restore();
 			},
 			/*
