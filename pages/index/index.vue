@@ -70,6 +70,10 @@
 									}
 								})
 								.then(res => {
+									uni.showToast({
+										icon: 'none',
+										title: '登录成功'
+									})
 									console.log(res)
 								});
 						}
@@ -114,6 +118,17 @@
 		padding: 60upx;
 		box-sizing: border-box;
 
+		.login-wxpng {
+			border: none;
+			padding: 0;
+			margin: 0;
+			border-radius: 0;
+
+			&::after {
+				display: none;
+			}
+		}
+
 		.iconfont {
 			display: block;
 			width: 250upx;
@@ -128,14 +143,19 @@
 			display: flex;
 			justify-content: space-between;
 
+			.login-wxpng {
+				width: calc(50% - 25upx);
+			}
+
 			.item {
-				width: calc(50% - 30upx);
+				width: 100%;
 				height: 320upx;
 				border-radius: 8upx;
 				display: flex;
 				justify-content: center;
 				flex-direction: column;
 				align-items: center;
+				box-sizing: border-box;
 
 				.text {
 					font-size: 36upx;
