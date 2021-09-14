@@ -7,8 +7,6 @@ const {
 
 exports.main = async (event, context) => {
 	//event为客户端上传的参数
-	console.log('event : ', event)
-
 	const res = await uniCloud.httpclient.request('https://api.weixin.qq.com/sns/jscode2session', {
 		method: 'POST',
 		data: {

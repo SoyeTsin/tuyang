@@ -1,32 +1,40 @@
 <template>
 	<view class="content" :style="[{ 'padding-top':docmentNodeValue.customBar + 'px'}]">
 		<view class="top">
-			<view class="item left" @click="intoPage(1)">
-				<view class="iconfont icon-shuzi1" style="color: #55aaff;"></view>
-				<view class="text">
-					数字记忆
+			<button class="login-wxpng" open-type="getUserInfo" @getuserinfo="xcxWxLogin">
+				<view class="item left" @click="intoPage(1)">
+					<view class="iconfont icon-shuzi1" style="color: #55aaff;"></view>
+					<view class="text">
+						数字记忆
+					</view>
 				</view>
-			</view>
-			<view class="item right" @click="intoPage(2)">
-				<view class="iconfont icon-zimu" style="color: #f8bc5e;"></view>
-				<view class="text">
-					字母编码
+			</button>
+			<button class="login-wxpng" open-type="getUserInfo" @getuserinfo="xcxWxLogin">
+				<view class="item right" @click="intoPage(2)">
+					<view class="iconfont icon-zimu" style="color: #f8bc5e;"></view>
+					<view class="text">
+						字母编码
+					</view>
 				</view>
-			</view>
+			</button>
 		</view>
 		<view class="list">
-			<view class="item item-1" @click="intoPage(3)">
-				<view class="iconfont icon-jiyi" style="color: rgba(52, 216, 198, 0.5);"></view>
-				<view class="text" style="color: rgba(52, 216, 198, 0.5);">
-					记忆宫殿
+			<button class="login-wxpng" open-type="getUserInfo" @getuserinfo="xcxWxLogin">
+				<view class="item item-1" @click="intoPage(3)">
+					<view class="iconfont icon-jiyi" style="color: rgba(52, 216, 198, 0.5);"></view>
+					<view class="text" style="color: rgba(52, 216, 198, 0.5);">
+						记忆宫殿
+					</view>
 				</view>
-			</view>
-			<view class="item item-2" @click="intoPage(4)">
-				<view class="iconfont icon-nao" style="color: rgba(255, 0, 0, 0.5);"></view>
-				<view class="text" style="color: rgba(255, 0, 0, 0.5);">
-					左右脑协调性测试
+			</button>
+			<button class="login-wxpng" open-type="getUserInfo" @getuserinfo="xcxWxLogin">
+				<view class="item item-2" @click="intoPage(4)">
+					<view class="iconfont icon-nao" style="color: rgba(255, 0, 0, 0.5);"></view>
+					<view class="text" style="color: rgba(255, 0, 0, 0.5);">
+						左右脑协调性测试
+					</view>
 				</view>
-			</view>
+			</button>
 		</view>
 	</view>
 </template>
@@ -45,16 +53,36 @@
 		},
 		onLoad() {
 			// promise方式
-			// #ifdef MP-WEIXIN
-			uniCloud.callFunction({
-					name: 'code2Session',
-				})
-				.then(res => {
-					console.log(res)
-				});
-			// #endif
 		},
 		methods: {
+			xcxWxLogin() {
+				var self = this;
+				// #ifdef MP-WEIXIN
+				uni.login({
+					provider: 'weixin',
+					success: function(res) {
+						if (res.code) {
+							console.log(res)
+							uniCloud.callFunction({
+									name: 'code2Session',
+									data: {
+										code: res.code
+									}
+								})
+								.then(res => {
+									console.log(res)
+								});
+						}
+					},
+					fail(e) {
+						console.log(e);
+					},
+					complete(e) {
+						console.log(e);
+					}
+				});
+				// #endif
+			},
 			intoPage(e) {
 				switch (e) {
 					case 1:

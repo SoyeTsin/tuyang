@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/digitalMode/digitalMode",
     "pages/digitalMode/simpleMode",
-    "pages/digitalMode/complexMode"
+    "pages/digitalMode/complexMode",
+    "pages/digitalMode/readingTraining",
+    "pages/coordinate/coordinate"
   ],
   "subPackages": [],
   "window": {
@@ -13,5 +15,9 @@
     "backgroundColor": "#F8F8F8",
     "navigationStyle": "custom"
   },
-  "usingComponents": {}
+  "uniStatistics": {
+    "enable": true
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }
