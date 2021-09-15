@@ -3,7 +3,7 @@
 		<Navigation :title='"数字编码"'></Navigation>
 		<view class="list">
 			<view class="item" v-for="(item,index) in list" :key='index'>
-				<text class="text">{{item.number}}</text>
+				<text class="text">{{index+1}}</text>
 				<image class="image" :src="'../../static/images/'+item.number+'.jpg'" mode="aspectFit"></image>
 			</view>
 		</view>
@@ -29,7 +29,7 @@
 		methods: {
 			startGame() {
 				let initList = []
-				for (let i = 0; i < 100; i++) {
+				for (let i = 0; i < 10; i++) {
 					initList.push({
 						number: i,
 						sort: Math.floor(Math.random() * 100000),
@@ -52,7 +52,7 @@
 			},
 			selectNumber() {
 				this.list = []
-				for (let i = 0; i < 19; i++) {
+				for (let i = 0; i < 10; i++) {
 					this.list.push(this.initList[i])
 				}
 			}
