@@ -150,7 +150,7 @@
 				this.initList = initList
 			},
 			nextNumber() {
-				if (this.process < 10) {
+				if (this.process < 100) {
 					let nowTime = (new Date()).getTime()
 					this.initList[this.process].endTime = nowTime
 					this.process++

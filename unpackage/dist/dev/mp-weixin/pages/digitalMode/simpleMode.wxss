@@ -27,6 +27,10 @@
 .simple-mode.data-v-2995373c {
   background-color: #F5F5F5;
 }
+.simple-mode .list.data-v-2995373c {
+  padding-top: 24rpx;
+  box-sizing: border-box;
+}
 .simple-mode .item.data-v-2995373c {
   display: -webkit-box;
   display: -webkit-flex;
@@ -47,5 +51,10 @@
   font-weight: 600;
   font-size: 36rpx;
   line-height: 56rpx;
+}
+.simple-mode .item image.data-v-2995373c {
+  background-color: #F5F5F5;
+  height: 500rpx;
+  width: 500rpx;
 }
 

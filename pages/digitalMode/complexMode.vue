@@ -20,8 +20,10 @@
 		</view>
 		<view class="list">
 			<view class="item" v-for="(item,index) in list" :key='index'>
-				<text class="text">{{item.number}}</text>
-				<image class="image" :src="'../../static/images/'+item.number+'.jpg'" mode="aspectFit"></image>
+				<text class="text">{{item.key}} {{item.name}}</text>
+				<image class="image"
+					:src="'https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/number/'+item.key+'.jpg'"
+					mode="aspectFit"></image>
 			</view>
 		</view>
 	</view>
@@ -29,6 +31,7 @@
 
 <script>
 	import Navigation from '../../components/navigation.vue'
+	import singleJson from '../../common/number.json'
 	export default {
 		components: {
 			Navigation
@@ -37,7 +40,9 @@
 			return {
 				activeLab: 0,
 				list: [],
-				initList:[]
+				initList: {
+					...singleJson
+				}
 			};
 		},
 		mounted() {
@@ -46,33 +51,21 @@
 		methods: {
 			startGame() {
 				let initList = []
-				for (let i = 0; i < 100; i++) {
+				for (let i in this.initList) {
 					initList.push({
-						number: i,
-						sort: Math.floor(Math.random() * 100000),
-						endTime: 0,
-						startTime: 0
+						name: this.initList[i],
+						key: i,
 					})
 				}
-			
-				initList.sort((a, b) => {
-					if (a.sort < b.sort) {
-						return 1
-					} else if (a.sort > b.sort) {
-						return -1
-					} else {
-						return 0
-					}
+				this.initList = initList.sort(function(a,b){
+					return a.key-b.key
 				})
-				this.initList = initList
 				this.selectNumber()
 			},
 			selectNumber(e = 0) {
 				this.activeLab = e
 				this.list = []
-				for (let i = e * 20; i < (e + 1) * 20; i++) {
-					this.list.push(this.initList[i])
-				}
+				this.list = this.initList.slice(e * 20, e * 20 + 20)
 			}
 		}
 	}
