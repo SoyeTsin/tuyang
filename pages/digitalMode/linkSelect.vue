@@ -1,42 +1,18 @@
 <template>
 	<view class="">
-		<Navigation :title='"数字训练"'></Navigation>
+		<Navigation :title='"链接训练"'></Navigation>
 		<view class="content">
-			<view class="top">
-				<view class="item left" @click="intoPage(1)">
-					<view class="icon">
-						<text style="color: #55aaff;">0-9</text>
-					</view>
-					<view class="text">
-						0-9数字编码
-					</view>
-				</view>
-				<view class="item right" @click="intoPage(2)">
-					<view class="icon">
-						<text style="color: #f8bc5e;">0-99</text>
-					</view>
-					<view class="text">
-						0-99数字编码
-					</view>
-				</view>
-			</view>
 			<view class="list">
-				<view class="item item-1" @click="intoPage(3)">
+				<view class="item item-1" @click="intoPage(1)">
 					<view class="iconfont icon-miaobiao" style="color: rgba(52, 216, 198, 0.5);"></view>
 					<view class="text" style="color: rgba(52, 216, 198, 0.5);">
-						读数训练
+						随机模式
 					</view>
 				</view>
-				<view class="item item-2" @click="intoPage(4)">
+				<view class="item item-2" @click="intoPage(2)">
 					<view class="iconfont icon-lianjie" style="color: rgba(255, 0, 0, 0.5);"></view>
 					<view class="text" style="color: rgba(255, 0, 0, 0.5);">
-						连接训练
-					</view>
-				</view>
-				<view class="item item-3">
-					<view class="iconfont icon-touzi" style="color: rgba(0, 170, 0, 0.5);"></view>
-					<view class="text" style="color: rgba(0, 170, 0, 0.5);">
-						随机数字
+						强化模式
 					</view>
 				</view>
 			</view>
@@ -60,23 +36,15 @@
 				switch (e) {
 					case 1:
 						uni.navigateTo({
-							url: '/pages/digitalMode/simpleMode'
+							url: '/pages/digitalMode/randomMode'
 						})
 						break;
 					case 2:
 						uni.navigateTo({
-							url: '/pages/digitalMode/complexMode'
-						})
-						break;
-					case 3:
-						uni.navigateTo({
-							url: '/pages/digitalMode/readingTraining'
+							url: '/pages/digitalMode/strengtheningMode'
 						})
 						break;
 					case 4:
-						uni.navigateTo({
-							url: '/pages/digitalMode/linkSelect'
-						})
 						break;
 				}
 			},

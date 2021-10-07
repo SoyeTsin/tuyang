@@ -89,16 +89,22 @@
 				switch (e) {
 					case 1:
 						uni.navigateTo({
-							url: '../digitalMode/digitalMode'
+							url: '/pages/digitalMode/digitalMode'
 						})
 						break;
 					case 2:
+						uni.navigateTo({
+							url: '/pages/letterMode/letterMode'
+						})
 						break;
 					case 3:
+						uni.navigateTo({
+							url: '/pages/shultGrid/shultGrid'
+						})
 						break;
 					case 4:
 						uni.navigateTo({
-							url: '../coordinate/coordinate'
+							url: '/pages/coordinate/coordinate'
 						})
 						break;
 				}

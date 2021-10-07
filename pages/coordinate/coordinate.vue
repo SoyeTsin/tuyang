@@ -76,7 +76,7 @@
 			</view>
 		</view>
 		<!-- 计算结果 -->
-		<view class="school-report">
+		<view class="school-report" v-if="showStatus===3">
 			<canvas style="height: 100%;width: 100%;backgroundColor: #ffffff" canvas-id="myCanvas"></canvas>
 		</view>
 	</view>
@@ -96,7 +96,7 @@
 		},
 		data() {
 			return {
-				showStatus: 0,
+				showStatus: 3,
 				countownDNumber: 3,
 				countownDNumberetInterval: null,
 				playEndTime: 30, //游戏结束时间
@@ -218,7 +218,7 @@
 						ctx.fillText("100%", uni.upx2px(405), uni.upx2px(760));
 						ctx.restore();
 						// 渲染二维码
-						
+
 						ctx.draw();
 					}
 				})
@@ -314,8 +314,8 @@
 					if (this.playEndTime <= 0) {
 						//game over
 						this.showStatus = 3
+						clearInterval(this.playEndTimeInterval)
 					}
-					clearInterval(this.playEndTimeInterval)
 				}, 1000)
 			},
 			changeShowStatus(e) {
@@ -325,7 +325,7 @@
 				}
 			},
 			startCountownDNumber() {
-				this.countownDNumber = 1
+				this.countownDNumber = 3 //倒计时开始游戏
 				this.countownDNumberetInterval = setInterval(() => {
 					this.countownDNumber--
 					if (this.countownDNumber <= 0) {

@@ -25,19 +25,10 @@
 /* 透明度 */
 /* 文章场景相关 */
 .content.data-v-57280228 {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   padding: 60rpx;
   box-sizing: border-box;
 }
@@ -65,12 +56,8 @@
 }
 .content .top.data-v-57280228 {
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  justify-content: space-between;
   padding-top: 48rpx;
 }
 .content .top .login-wxpng.data-v-57280228 {
@@ -80,19 +67,10 @@
   width: 100%;
   height: 320rpx;
   border-radius: 8rpx;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   box-sizing: border-box;
 }
 .content .top .item .text.data-v-57280228 {
@@ -123,19 +101,10 @@
 .content .list .item.data-v-57280228 {
   height: 100%;
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   border-radius: 8rpx;
 }
 .content .list .item image.data-v-57280228 {
