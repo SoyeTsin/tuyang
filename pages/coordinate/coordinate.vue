@@ -1,7 +1,7 @@
 <template>
 	<view class="coordinate">
 		<!-- 左右脑协调性测试 -->
-		<Navigation :title='"Demo"'></Navigation>
+		<Navigation :title='"左右脑协调性测试"'></Navigation>
 		<view class="play-ready" v-if="showStatus===0">
 			<view class="content">
 				<view class="tips-title">
@@ -49,7 +49,7 @@
 			</view>
 			<view class="ranking-list-button">
 				<view class="iconfont icon-huangguan"></view>
-				<view class="text">
+				<view class="text" @click="showStatus=3">
 					排行榜
 				</view>
 			</view>
@@ -68,7 +68,6 @@
 			</view>
 			<view class="color-content">
 				<view class="explain-item" v-for="(item,index) in nowColorArr" :key='index'>
-					{{item.ifRight}}
 					<view class="circular" :style="{backgroundColor:item.color}" @click="selectCircular(item)">
 						{{item.name}}
 					</view>
@@ -96,7 +95,7 @@
 		},
 		data() {
 			return {
-				showStatus: 3,
+				showStatus:0, // 当前模块
 				countownDNumber: 3,
 				countownDNumberetInterval: null,
 				playEndTime: 30, //游戏结束时间
@@ -139,9 +138,7 @@
 			};
 		},
 		onLoad() {
-			setTimeout(() => {
-				this.createPlacard()
-			}, 300)
+			
 		},
 		methods: {
 			initCanvas() {
@@ -149,20 +146,21 @@
 				ctx.fillStyle = "#55aaff";
 				this.circleImgOne(ctx, danao, uni.upx2px(175), uni.upx2px(95), uni.upx2px(200));
 				ctx.draw();
+				this.createPlacard()
 			},
 			// 开始制作头像
 			createPlacard() {
+				let avatarUrl= uni.getStorageSync('avatarUrl')||danao
 				uni.getImageInfo({
-					src: danao, // 网络图片需先下载，得到临时本地路径，否则绘入 Canvas 可能会出现空白
+					src: avatarUrl, // 网络图片需先下载，得到临时本地路径，否则绘入 Canvas 可能会出现空白
 					success: (img) => {
-						const ctx = wx.createCanvasContext('myCanvas', this);
+						const ctx = uni.createCanvasContext('myCanvas');
 						ctx.fillStyle = "#00aa7f";
 						ctx.fillRect(0, 0, uni.upx2px(750), uni.upx2px(1334));
 
-
 						//画logo
 						ctx.save()
-						ctx.drawImage(img.path, uni.upx2px(275), uni.upx2px(
+						ctx.drawImage(danao, uni.upx2px(275), uni.upx2px(
 							40), uni.upx2px(200), uni.upx2px(200));
 						ctx.restore()
 						//画文字
@@ -170,7 +168,7 @@
 						ctx.fillStyle = '#FFFFFF'; // 文字填充颜色
 						ctx.textAlign = "center";
 						ctx.textBaseline = "middle";
-						ctx.fillText("中中中", uni.upx2px(375), uni.upx2px(250));
+						ctx.fillText("左右脑协调性测试", uni.upx2px(375), uni.upx2px(250));
 						//画方框
 						ctx.fillStyle = '#ffffff';
 						// ctx.fillRect(uni.upx2px((750-650)/2), 200, uni.upx2px(650), 100);
@@ -197,7 +195,8 @@
 						ctx.fillStyle = '#000000'; // 文字填充颜色
 						ctx.textAlign = "left";
 						ctx.textBaseline = "middle";
-						ctx.fillText("中中中", uni.upx2px(220), uni.upx2px(410));
+						let name= uni.getStorageSync('nickName')||'我的成绩'
+						ctx.fillText(name, uni.upx2px(220), uni.upx2px(410));
 						ctx.restore();
 						//画大括号
 						this.braces(ctx, uni.upx2px(140), uni.upx2px(540))
@@ -315,6 +314,10 @@
 						//game over
 						this.showStatus = 3
 						clearInterval(this.playEndTimeInterval)
+						setTimeout(() => {
+							this.initCanvas()
+							this.createPlacard()
+						}, 300)
 					}
 				}, 1000)
 			},

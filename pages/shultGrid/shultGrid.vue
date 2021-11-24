@@ -22,8 +22,29 @@
 				<view class="time">
 					时间：{{time}}
 				</view>
-				<view class="lishi">
-
+				
+			</view>
+			<view class="lishi">
+				<view class="title">
+					历史成绩
+				</view>
+				<view class="list">
+					<view class="lishi-item">
+						<view >
+							等级
+						</view>
+						<view class="">
+							成绩
+						</view>
+					</view>
+					<view class="lishi-item"  v-for="(item,index) in lishi" :key="index">
+						<view >
+							{{item.lv}}
+						</view>
+						<view class="">
+							{{item.time}}
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -43,7 +64,8 @@
 				clickedList: [],
 				nowClick: null,
 				time: '00\'000\"',
-				started: false
+				started: false,
+				lishi:[]
 			};
 		},
 		computed: {
@@ -119,6 +141,11 @@
 				if (this.clickedList.length === this.number * this.number) {
 					this.started = false
 					clearInterval(this.timeInter)
+					uni.showToast({
+						icon:'none',
+						title:'挑战成功，成绩：'+this.time
+					})
+					this.lishi.push({lv:this.number,time:this.time})
 				}
 			},
 			verification(e) {
@@ -140,6 +167,7 @@
 			stopGame() {
 				this.started = false
 				clearInterval(this.timeInter)
+				
 			},
 			getYMDHMS(startTime, endTime) {
 				let diff = endTime - startTime
@@ -158,6 +186,31 @@
 		padding: 60upx 0;
 		box-sizing: border-box;
 
+		.lishi{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			padding: 40upx 24upx 0 24upx;
+			.title{
+				font-weight: 600;
+			}
+			.list{
+				width: 100%;
+				display: flex;
+				justify-content: flex-start;
+				flex-direction: column;
+				.lishi-item{
+					width: 100%;
+					display: flex;
+					justify-content: space-between;
+					>view{
+						width: 50%;
+						text-align: center;
+					}
+				}
+			}
+		}
 		.play {
 			display: flex;
 			justify-content: center;
@@ -193,6 +246,7 @@
 			display: flex;
 			justify-content: space-between;
 			width: 100%;
+			
 		}
 
 		.item {
@@ -200,7 +254,20 @@
 			border: solid 2upx #E5E5E5;
 			margin: 6upx;
 			text-align: center;
-
+			&:hover{
+				animation: myHover 1s linear;
+			}
+			
+			@keyframes myHover {
+				0% {
+					background-color: #d93030;
+				}
+			
+				100% {
+					background-color: #FFFFFF;
+				}
+			}
+			
 			&.active {
 				animation: myActive 1s linear;
 			}

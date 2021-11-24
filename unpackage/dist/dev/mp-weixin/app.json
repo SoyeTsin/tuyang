@@ -4,13 +4,16 @@
     "pages/coordinate/coordinate",
     "pages/shultGrid/shultGrid",
     "pages/letterMode/letterMode",
+    "pages/letterMode/index",
+    "pages/letterMode/moreLetterMode",
     "pages/digitalMode/randomMode",
     "pages/digitalMode/strengtheningMode",
     "pages/digitalMode/linkSelect",
     "pages/digitalMode/digitalMode",
     "pages/digitalMode/simpleMode",
     "pages/digitalMode/complexMode",
-    "pages/digitalMode/readingTraining"
+    "pages/digitalMode/readingTraining",
+    "pages/teamIntroduction/teamIntroduction"
   ],
   "subPackages": [],
   "window": {

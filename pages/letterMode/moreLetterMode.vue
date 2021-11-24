@@ -1,14 +1,23 @@
 <template>
 	<view class="simple-mode">
-		<Navigation :title='"单字母编码"'></Navigation>
+		<Navigation :title='"数字编码"'></Navigation>
 		<view class="lab">
 			<view :class="activeLab===0?'text active':'text'" @click="selectNumber(0)">
-				A-J
+				A-C
 			</view>
 			<view :class="activeLab===1?'text active':'text'" @click="selectNumber(1)">
-				K-T
+				D-F
 			</view>
 			<view :class="activeLab===2?'text active':'text'" @click="selectNumber(2)">
+				G-L
+			</view>
+			<view :class="activeLab===3?'text active':'text'" @click="selectNumber(3)">
+				M-P
+			</view>
+			<view :class="activeLab===4?'text active':'text'" @click="selectNumber(4)">
+				R-T
+			</view>
+			<view :class="activeLab===5?'text active':'text'" @click="selectNumber(5)">
 				U-Z
 			</view>
 		</view>
@@ -16,7 +25,7 @@
 			<view class="item" v-for="(item,index) in list" :key='index'>
 				<text class="text">{{item.key.toUpperCase()}} {{item.name}}</text>
 				<image class="image"
-					:src="'https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/single/'+item.key+'.jpg'"
+					:src="'https://7463-tcb-lqt34pwa7ed1dc-7d6e141a94107-1307263270.tcb.qcloud.la/images/double/'+item.key+'.jpg'"
 					mode="aspectFit"></image>
 			</view>
 		</view>
@@ -25,7 +34,7 @@
 
 <script>
 	import Navigation from '../../components/navigation.vue'
-	import singleJson from '../../common/single.json'
+	import singleJson from '../../common/double.json'
 	export default {
 		components: {
 			Navigation
@@ -59,12 +68,25 @@
 			selectNumber(e = 0) {
 				this.activeLab = e
 				this.list = []
-				if (e === 0) {
-					this.list = this.initList.slice(0, 10)
-				} else if (e === 1) {
-					this.list = this.initList.slice(10, 20)
-				} else {
-					this.list = this.initList.slice(20, 26)
+				switch(e){
+					case 0:
+						this.list = this.initList.slice(0, 23)
+						break;
+					case 1:
+						this.list = this.initList.slice(23, 49)
+						break;
+					case 2:
+						this.list = this.initList.slice(49, 74)
+						break;
+					case 3:
+						this.list = this.initList.slice(74, 96)
+						break;
+					case 4:
+						this.list = this.initList.slice(96, 122)
+						break;
+					case 5:
+						this.list = this.initList.slice(122, 135)
+						break;
 				}
 			}
 		}
@@ -107,7 +129,6 @@
 			align-items: center;
 			flex-direction: column;
 			margin-bottom: 48upx;
-
 			.text {
 				font-weight: 600;
 				font-size: 36upx;

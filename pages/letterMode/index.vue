@@ -1,59 +1,39 @@
 <template>
-	<view class="content" :style="[{ 'padding-top':docmentNodeValue.customBar + 'px'}]">
-		<view class="top">
-			<button class="login-wxpng" open-type="getUserInfo" @getuserinfo="xcxWxLogin">
-				<view class="item left" @click="intoPage(1)">
-					<view class="iconfont icon-shuzi1" style="color: #55aaff;"></view>
-					<view class="text">
-						数字记忆
+	<view class="">
+		<Navigation :title='"数字编码"'></Navigation>
+		<view class="content" :style="[{ 'padding-top':docmentNodeValue.customBar + 'px'}]">
+			<view class="list">
+				<button class="login-wxpng" open-type="getUserInfo" @getuserinfo="xcxWxLogin">
+					<view class="item item-1" @click="intoPage(0)">
+						<view class="iconfont icon-zimu" style="color: #f8bc5e;"></view>
+						<view class="text" style="color: #f8bc5e;">
+							单字母编码
+						</view>
 					</view>
-				</view>
-			</button>
-			<button class="login-wxpng" open-type="getUserInfo" @getuserinfo="xcxWxLogin">
-				<view class="item right" @click="intoPage(2)">
-					<view class="iconfont icon-zimu" style="color: #f8bc5e;"></view>
-					<view class="text">
-						字母编码
+				</button>
+				<button class="login-wxpng" open-type="getUserInfo" @getuserinfo="xcxWxLogin">
+					<view class="item item-2" @click="intoPage(1)">
+						<view class="iconfont icon-zimu" style="color: rgba(255, 0, 0, 0.5);"></view>
+						<view class="text" style="color: rgba(255, 0, 0, 0.5);">
+							多字母编码
+						</view>
 					</view>
-				</view>
-			</button>
-		</view>
-		<view class="list">
-			<button class="login-wxpng" open-type="getUserInfo" @getuserinfo="xcxWxLogin">
-				<view class="item item-1" @click="intoPage(3)">
-					<view class="iconfont icon-jiyi" style="color: rgba(52, 216, 198, 0.5);"></view>
-					<view class="text" style="color: rgba(52, 216, 198, 0.5);">
-						舒尔特表
-					</view>
-				</view>
-			</button>
-			<button class="login-wxpng" open-type="getUserInfo" @getuserinfo="xcxWxLogin">
-				<view class="item item-2" @click="intoPage(4)">
-					<view class="iconfont icon-nao" style="color: rgba(255, 0, 0, 0.5);"></view>
-					<view class="text" style="color: rgba(255, 0, 0, 0.5);">
-						左右脑协调性测试
-					</view>
-				</view>
-			</button>
-		</view>
-		<view class="list" style="margin-top: 0;">
-			<button class="login-wxpng" open-type="getUserInfo" @getuserinfo="xcxWxLogin" style="height: 120upx;">
-				<view class="item item-1" @click="intoPage(5)" style="height: 120upx;">
-					<view class="text" style="color: rgba(59, 101, 216, 0.5);">
-						团队介绍
-					</view>
-				</view>
-			</button>
+				</button>
+			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import Navigation from '../../components/navigation.vue'
 	export default {
 		data() {
 			return {
 				title: 'Hello'
 			}
+		},
+		components: {
+			Navigation
 		},
 		computed: {
 			docmentNodeValue() {
@@ -66,8 +46,6 @@
 		methods: {
 			xcxWxLogin(e) {
 				const userInfo = e.detail.userInfo
-				let avatarUrl = uni.setStorageSync('avatarUrl' ,userInfo.avatarUrl)
-				let nickName = uni.setStorageSync('nickName',userInfo.nickName)
 				const self = this;
 				// #ifdef MP-WEIXIN
 				uni.login({
@@ -98,29 +76,14 @@
 			},
 			intoPage(e) {
 				switch (e) {
+					case 0:
+						uni.navigateTo({
+							url: '/pages/letterMode/letterMode'
+						})
+						break;
 					case 1:
 						uni.navigateTo({
-							url: '/pages/digitalMode/digitalMode'
-						})
-						break;
-					case 2:
-						uni.navigateTo({
-							url: '/pages/letterMode/index'
-						})
-						break;
-					case 3:
-						uni.navigateTo({
-							url: '/pages/shultGrid/shultGrid'
-						})
-						break;
-					case 4:
-						uni.navigateTo({
-							url: '/pages/coordinate/coordinate'
-						})
-						break;
-					case 5:
-						uni.navigateTo({
-							url: '/pages/teamIntroduction/teamIntroduction'
+							url: '/pages/letterMode/moreLetterMode'
 						})
 						break;
 				}
@@ -239,7 +202,7 @@
 			}
 
 			.item-1 {
-				border: solid 2upx rgba(52, 216, 198, 0.5);
+				border: solid 2upx #f8bc5e;
 			}
 
 			.item-2 {

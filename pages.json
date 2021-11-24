@@ -14,14 +14,14 @@
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
-		}, {
+		},{
 			"path": "pages/coordinate/coordinate",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
-
-		}, {
+		
+		},{
 			"path": "pages/shultGrid/shultGrid",
 			"style": {
 				"navigationBarTitleText": "",
@@ -30,6 +30,18 @@
 
 		}, {
 			"path": "pages/letterMode/letterMode",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/letterMode/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/letterMode/moreLetterMode",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
@@ -87,7 +99,16 @@
 
 		}
 
-	],
+	    ,{
+            "path" : "pages/teamIntroduction/teamIntroduction",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
